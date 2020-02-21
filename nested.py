@@ -30,23 +30,17 @@ def is_nested(line):
             continue
         else:
             if index != len(new_list) - 1:
-                if is_bracket == '(' and new_list[index + 1] == '*':
-                    is_bracket = '(*'
-                    skip = True
-                elif is_bracket == '*' and new_list[index + 1] == ')':
-                    is_bracket = '*)'
-                    skip = True
-            if is_bracket in opening_brackets:
-                stack.append(is_bracket)
-                i += 1
-            elif is_bracket in closing_brackets:
-                i += 1
-                if stack[-1] == brackets[is_bracket]:
-                    stack.pop()
+                if is_bracket in opening_brackets:
+                    stack.append(is_bracket)
+                    i += 1
+                elif is_bracket in closing_brackets:
+                    i += 1
+                    if stack[-1] == brackets[is_bracket]:
+                        stack.pop()
+                    else:
+                        return "NO " + str(i)
                 else:
-                    return "NO " + str(i)
-            else:
-                i += 1
+                    i += 1
     if len(stack) == 0:
         return "YES"
     else:
